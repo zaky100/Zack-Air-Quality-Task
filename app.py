@@ -13,8 +13,8 @@ st.set_page_config(page_title="Air Quality Dashboard", layout="wide")
 @st.cache_data
 def load_data():
     # UPDATED: Matches the exact filename you uploaded to GitHub
-    if os.path.exists('Task1_Combined_Data.csv'):
-        return pd.read_csv('Task1_Combined_Data.csv')
+    if os.path.exists('Task1_Combined_Data (1).csv'):
+        return pd.read_csv('Task1_Combined_Data (1).csv')
     else:
         return pd.DataFrame()
 
