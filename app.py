@@ -23,8 +23,8 @@ def load_data():
 def load_ml_components():
     
     model = joblib.load('rf_model.pkl.gz')
-    scaler = joblib.load('scaler.pkl')
-    model_columns = joblib.load('model_columns.pkl')
+    scaler = joblib.load('scaler (1).pkl')
+    model_columns = joblib.load('model_columns (3).pkl')
     return model, scaler, model_columns
 
 df = load_data()
