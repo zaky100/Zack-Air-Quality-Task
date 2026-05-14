@@ -1,4 +1,3 @@
-
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -13,15 +12,17 @@ st.set_page_config(page_title="Air Quality Dashboard", layout="wide")
 # Data caching with safety check
 @st.cache_data
 def load_data():
-    if os.path.exists('Task1_Combined_Data (1).csv'):
-        return pd.read_csv('Task1_Combined_Data (1).csv')
+    # UPDATED: Matches the exact filename you uploaded to GitHub
+    if os.path.exists('Task1_Combined_Data.csv'):
+        return pd.read_csv('Task1_Combined_Data.csv')
     else:
         return pd.DataFrame()
 
 # Model caching
 @st.cache_resource
 def load_ml_components():
-    model = joblib.load('rf_model.pkl')
+    
+    model = joblib.load('rf_model.pkl.gz')
     scaler = joblib.load('scaler.pkl')
     model_columns = joblib.load('model_columns.pkl')
     return model, scaler, model_columns
@@ -33,7 +34,8 @@ page = st.sidebar.radio("Go to:", ["Dataset Overview", "Visualizations", "Model 
 
 # Check if data loaded successfully for the first two pages
 if df.empty and page in ["Dataset Overview", "Visualizations"]:
-    st.error("⚠️ Data file 'Task1_Combined_Data (1).csv' not found. Please make sure the file is in your Colab environment.")
+    
+    st.error(" Data file 'Task1_Combined_Data.csv' not found. Please ensure it is uploaded to the GitHub repository.")
 else:
     # DATASET OVERVIEW
     if page == "Dataset Overview":
@@ -129,7 +131,7 @@ if page == "Model Outputs":
             elif prediction[0] < 75:
                 st.warning(" Air Quality is Moderate")
             else:
-                st.error("Air Quality is Unhealthy")
+                st.error(" Air Quality is Unhealthy")
 
     except Exception as e:
-        st.error(f"Error loading model: {e}. Make sure you ran Task 3 to generate the .pkl files.")
+        st.error(f"Error loading model: {e}. Make sure you ran Task 3 to generate the .pkl files and uploaded them to GitHub.")
